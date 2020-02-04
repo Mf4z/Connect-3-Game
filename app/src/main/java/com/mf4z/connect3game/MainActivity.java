@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -67,10 +69,29 @@ public class MainActivity extends AppCompatActivity {
                         winner = "Red";
 
                     }
-                    Toast.makeText(this, winner + " player has won", Toast.LENGTH_LONG).show();
+
+                    TextView winnerTextView = (TextView) findViewById(R.id.winner_textView);
+                    Button playAginaBtn = (Button) findViewById(R.id.play_again_button);
+
+                    winnerTextView.setText(winner + " player has won");
+
+                    //Displays when there is a winner
+
+                    winnerTextView.setVisibility(View.VISIBLE);
+                    playAginaBtn.setVisibility(View.VISIBLE);
                 }
             }
 
         }
+    }
+
+    public void playAgain(View view){
+
+        TextView winnerTextView = (TextView) findViewById(R.id.winner_textView);
+        Button playAginaBtn = (Button) findViewById(R.id.play_again_button);
+
+        //Hide Button and Text View
+        winnerTextView.setVisibility(View.INVISIBLE);
+        playAginaBtn.setVisibility(View.INVISIBLE);
     }
 }
