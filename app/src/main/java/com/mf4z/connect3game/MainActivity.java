@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     int[] gameState = {2, 2, 2, 2, 2, 2, 2, 2, 2};
     int[][] winningPositions = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6},
             {1, 4, 7}, {2, 5, 8}, {0, 4, 8}, {2, 4, 6}};
+    boolean gameActive = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         ImageView counter = (ImageView) view;
         int tappedCounter = Integer.parseInt(counter.getTag().toString());
 
-                //Check if box is empty and has no counter
-        if (gameState[tappedCounter] == 2) {
+                //Check if box is empty and has no counter and if game is active
+        if (gameState[tappedCounter] == 2 && gameActive) {
             gameState[tappedCounter] = mActivePlayer;
             counter.setTranslationY(-1500); //Moves the view(Counter) off the screen initially
 
@@ -53,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
                 if (gameState[winningPosition[0]] == gameState[winningPosition[1]] &&
                         gameState[winningPosition[1]] == gameState[winningPosition[2]] &&
                         gameState[winningPosition[0]] != 2) {
+
+                    //Someone has won
+
+                    gameActive = false;
 
                     String winner = "";
 
