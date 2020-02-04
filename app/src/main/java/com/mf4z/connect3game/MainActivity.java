@@ -26,38 +26,46 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView counter = (ImageView) view;
         int tappedCounter = Integer.parseInt(counter.getTag().toString());
-        gameState[tappedCounter] = mActivePlayer;
 
-        counter.setTranslationY(-1500);
+                //Check if box is empty and has no counter
+        if (gameState[tappedCounter] == 2) {
+            gameState[tappedCounter] = mActivePlayer;
+            counter.setTranslationY(-1500); //Moves the view(Counter) off the screen initially
 
-        if (mActivePlayer == 0) {
 
-            counter.setImageResource(R.drawable.yellow);
-            mActivePlayer = 1;
-        } else {
-            counter.setImageResource(R.drawable.red);
-            mActivePlayer = 0;
-        }
+            //Check to determine which player is active and setting the color of Counter
+            if (mActivePlayer == 0) {
 
-        counter.animate().translationYBy(1500).rotation(3600).setDuration(300);
-
-        for (int[] winningPosition : winningPositions) {
-
-            if (gameState[winningPosition[0]] == gameState[winningPosition[1]] &&
-                    gameState[winningPosition[1]] == gameState[winningPosition[2]] &&
-                    gameState[winningPosition[0]] != 2) {
-
-                String winner = "";
-
-                if (mActivePlayer == 1) {
-                    winner = "Yellow";
-                } else {
-                    winner = "Red";
-
-                }
-                Toast.makeText(this, winner+" player has won", Toast.LENGTH_LONG).show();
+                counter.setImageResource(R.drawable.yellow);
+                mActivePlayer = 1;
+            } else {
+                counter.setImageResource(R.drawable.red);
+                mActivePlayer = 0;
             }
-        }
 
+            //Responsible for the animated effect of Counter being dropped
+            counter.animate().translationYBy(1500).rotation(3600).setDuration(300);
+
+            //Iteration to check possible winning combinations
+            for (int[] winningPosition : winningPositions) {
+
+                //Check if winning condition satisfies one of the winning combinations
+                if (gameState[winningPosition[0]] == gameState[winningPosition[1]] &&
+                        gameState[winningPosition[1]] == gameState[winningPosition[2]] &&
+                        gameState[winningPosition[0]] != 2) {
+
+                    String winner = "";
+
+                    if (mActivePlayer == 1) {
+                        winner = "Yellow";
+                    } else {
+                        winner = "Red";
+
+                    }
+                    Toast.makeText(this, winner + " player has won", Toast.LENGTH_LONG).show();
+                }
+            }
+
+        }
     }
 }
