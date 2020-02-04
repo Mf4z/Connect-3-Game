@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -93,5 +94,18 @@ public class MainActivity extends AppCompatActivity {
         //Hide Button and Text View
         winnerTextView.setVisibility(View.INVISIBLE);
         playAginaBtn.setVisibility(View.INVISIBLE);
+
+        //ImageView counter = (ImageView) view;
+
+        GridLayout  gridLayout = (GridLayout) findViewById(R.id.gridLayout);
+
+        //Get the child views(ImageView) of the parent view (Gridview)
+        final int childCount = gridLayout.getChildCount();
+
+        //Loop and set ImageView to null
+        for (int i = 0; i < childCount; i++) {
+            ImageView counter = (ImageView) gridLayout.getChildAt(i);
+           counter.setImageDrawable(null);
+        }
     }
 }
