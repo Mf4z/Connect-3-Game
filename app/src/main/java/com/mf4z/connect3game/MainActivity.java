@@ -107,5 +107,16 @@ public class MainActivity extends AppCompatActivity {
             ImageView counter = (ImageView) gridLayout.getChildAt(i);
            counter.setImageDrawable(null);
         }
+
+       //Reset active player
+         mActivePlayer = 0;
+
+        //Reset game state
+        for (int i = 0;i< gameState.length;i++){
+            gameState[i] = 2;
+        }
+
+        //Reset game to active
+        gameActive = true;
     }
 }
